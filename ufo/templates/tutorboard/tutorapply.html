@@ -22,4 +22,26 @@
 <button type="button" class="btn btn-warning"><a href="{% url 'tutors' %}">뒤로가기</a></button>
 </div>
 
+<!-- # 작성된 comment 보여주기 -->
+<h2><strong>Comments</strong></h2>
+<!-- # details라는 객체에 종속되는 comments객체를 불러서 사용한다. (comment model의 related_name을 사용한다.) -->
+{% for comment in tutorApply.tuteeComments.all %}
+    <span>글쓴날짜 : </span>{{comment.created_date}}<br>
+    <span>글쓴이 : </span><strong>{{comment.comment_author}}</strong><br>
+    <span>글쓴내용 : </span><p>{{comment.comment_contents}}</p>
+<!-- # comment 객체가 하나라도 없으면 아래 출력 -->
+{% empty %}
+    <p>No comments here yet </p>
+{% endfor %}
+<!-- # comment 입력받는 폼 생성 -->
+<h2><strong>Create Comments</strong></h2>
+<div class="container">
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+    </form>
+</div>
+</div>
+
   {% endblock %}

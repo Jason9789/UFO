@@ -88,7 +88,6 @@ def tutorapplyremove(request, tutorapply_id):
     # messages.success(request, 'Post Successfully removed')
     return redirect('tutors')
 
-
 def tutorComment(request, tutorrequest_id):
     post = get_object_or_404(TutorRequest, pk=tutorrequest_id)
     if request.method == 'POST':

@@ -4,8 +4,25 @@
 {% block contents %}
 <div class="container pt-5">
   <a href="{% url 'newtutorrequest' %}">새 글쓰기</a>
+
+  <form action="." method="post">
+    {% csrf_token %} {{ form.as_p }} <!-- form -->
+    <input type="submit"> </form>
+    {% if object_list %}
+    <!-- # 검색 결과가 있을 경우 -->
+    {% for post in object_list %}
+    {<a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+    <!-- # 검색된 리스트를보여준다. -->
+    {% endfor %} {% elif search_word %}
+    <!-- # 검색 결과가 없을 경우 -->
+    Search Word {{ search_word }} Not Found!
+    <!-- # 검색된 결과가 없다는 메세지를 보여준다. -->
+    {% endif %}
+
+
+
   <div class="row">
-  {% for tutorRequest in tutorRequests %}
+    {% for tutorRequest in tutorRequests %}
     <div class="card col-md-4" style="padding-bottom:20px;">
       <div class="card-body">
         {% if tutorRequest.image %}
@@ -19,7 +36,7 @@
         <p class="text-right"><a href="{% url 'tutorrequest' tutorRequest.pk %}" class="btn btn-default">더보기</a></p>
       </div>
     </div>
-  {% endfor %}
+    {% endfor %}
   </div>
 
   {% if tutee_page.has_previous %}

@@ -4,22 +4,45 @@
 {% block contents %}
 
 <div class="jumbotron" style="align-content: center;text-align: center" style="font-family: 'YunTaemin'">
-    <h1 class="display-4" style="font-family: 'YunTaemin', sans-serif;">{{tutorRequest.title}}</h1>
-    <hr class="my-4">
-    {%if tutorRequest.image%}
-    <img src="{{tutorRequest.image.url}}" alt="사진" height=300>
-    {% endif %}
-    <p class="lead" style="font-family: 'YunTaemin', sans-serif;">{{tutorRequest.content}}</p>
-    <p>{{tutorRequest.created_at}}</p>
-    {% if tutorRequest.author == user %}
-        <a href="{% url 'tutorrequestedit' tutorRequest.pk %}" style="font-family: 'YunTaemin', sans-serif;">수정</a>
-        <a href="{% url 'tutorrequestremove' tutorRequest.pk %}" style="font-family: 'YunTaemin', sans-serif;">삭제</a>
-        <br>
-    {% else %}
-        <p style="font-family: 'YunTaemin', sans-serif;">글 수정 권한이 없습니다.</p>
-    {% endif %}
-    <br>
-    <button type="button" class="btn btn-warning"><a href="{% url 'tutees' %}">뒤로가기</a></button>
+  <h1 class="display-4" style="font-family: 'YunTaemin', sans-serif;">{{tutorRequest.title}}</h1>
+  <hr class="my-4">
+  {%if tutorRequest.image%}
+  <img src="{{tutorRequest.image.url}}" alt="사진" height=300>
+  {% endif %}
+  <p class="lead" style="font-family: 'YunTaemin', sans-serif;">{{tutorRequest.content}}</p>
+  <p>{{tutorRequest.created_at}}</p>
+  {% if tutorRequest.author == user %}
+  <a href="{% url 'tutorrequestedit' tutorRequest.pk %}" style="font-family: 'YunTaemin', sans-serif;">수정</a>
+  <a href="{% url 'tutorrequestremove' tutorRequest.pk %}" style="font-family: 'YunTaemin', sans-serif;">삭제</a>
+  <br>
+  {% else %}
+  <p style="font-family: 'YunTaemin', sans-serif;">글 수정 권한이 없습니다.</p>
+  {% endif %}
+  <br>
+  <button type="button" class="btn btn-warning"><a href="{% url 'tutees' %}">뒤로가기</a></button>
 </div>
+
+<div class='container' style='text-align:center';>
+        <!-- # 작성된 comment 보여주기 -->
+        <h2><strong>Comments</strong></h2>
+        <!-- # details라는 객체에 종속되는 comments객체를 불러서 사용한다. (comment model의 related_name을 사용한다.) -->
+        {% for comment in tutorRequest.tutorComments.all %}
+            <span>글쓴날짜 : </span>{{comment.created_date}}<br>
+            <span>글쓴이 : </span><strong>{{comment.comment_author}}</strong><br>
+            <span>글쓴내용 : </span><p>{{comment.comment_contents}}</p>
+        <!-- # comment 객체가 하나라도 없으면 아래 출력 -->
+        {% empty %}
+            <p>No comments here yet </p>
+        {% endfor %}
+        <!-- # comment 입력받는 폼 생성 -->
+        <h2><strong>Create Comments</strong></h2>
+        <div class="container">
+            <form method="post">
+            {% csrf_token %}
+            {{ form.as_p}}
+            <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
 
 {% endblock %}

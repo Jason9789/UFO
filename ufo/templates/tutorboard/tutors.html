@@ -4,6 +4,7 @@
 {% block contents %}
 <div class="pt-5">
   <a href="{% url 'newtutorapply' %}">새 글쓰기</a>
+
   {% for tutorApply in tutorApplys %}
   <h1>{{tutorApply.title}}</h1>
   <h2>{{tutorApply.summary}}</h2>
@@ -29,4 +30,5 @@
     <span>{{tutor_page.paginator.num_pages}}</span>
   </center>
 </div>
+
 {% endblock %}
