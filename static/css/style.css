@@ -1,0 +1,14 @@
+header.masthead {
+  text-align: center;
+  color: white;
+  background-image: url("../images/header-bg.png");
+  background-size: cover;
+}
+
+.typing {
+  line-height: 400px;
+  font-family: 'YunTaemin', sans-serif;
+  font-size:60px;
+}
+
+@font-face { font-family: 'YunTaemin'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/YunTaemin.woff') format('woff'); font-weight: normal; font-style: normal; }
