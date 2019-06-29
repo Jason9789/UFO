@@ -2,7 +2,7 @@ header.masthead {
   text-align: center;
   color: white;
   background-image: url("../images/header-bg.png");
-  height:400px;
+  background-size: cover;
 }
 
 .typing {
