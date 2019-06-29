@@ -2,29 +2,31 @@
 {% load static %}
 
 {% block contents %}
-<a href="{% url 'newtutorapply' %}">새 글쓰기</a>
-{% for tutorApply in tutorApplys %}
-<h1>{{tutorApply.title}}</h1>
-<h2>{{tutorApply.summary}}</h2>
-<p>{{tutorApply.created_at}}</p>
-{% if tutorApply.image %}
-<img src="{{tutorApply.image.url}}" height=200 alt="사진">
-{% endif%}
-<a href="{% url 'tutorapply' tutorApply.pk %}">더보기</a>
-{% endfor %}
+<div class="pt-5">
+  <a href="{% url 'newtutorapply' %}">새 글쓰기</a>
+  {% for tutorApply in tutorApplys %}
+  <h1>{{tutorApply.title}}</h1>
+  <h2>{{tutorApply.summary}}</h2>
+  <p>{{tutorApply.created_at}}</p>
+  {% if tutorApply.image %}
+  <img src="{{tutorApply.image.url}}" height=200 alt="사진">
+  {% endif%}
+  <a href="{% url 'tutorapply' tutorApply.pk %}">더보기</a>
+  {% endfor %}
 
-{% if tutor_page.has_previous %}
-        <a href="?page=1" class="btn btn-secondary">First</a>
-        <a href="?page={{tutee_page.previous_page_number}}" class="btn btn-secondary">Previous</a>
-        {% endif %}
-        {% if tutor_page.has_next %}
-        <a href="?page={{tutee_page.next_page_number}}" class="btn btn-secondary">Next</a>
-        <a href="?page={{tutee_page.paginator.num_pages}}" class="btn btn-secondary">Last</a>
-        {% endif %}
-      </div></center>
-      <br>
-      <center>
-  <span>{{tutor_page.number}}</span>
-  <span>of</span>
-  <span>{{tutor_page.paginator.num_pages}}</span>
+  {% if tutor_page.has_previous %}
+  <a href="?page=1" class="btn btn-secondary">First</a>
+  <a href="?page={{tutee_page.previous_page_number}}" class="btn btn-secondary">Previous</a>
+  {% endif %}
+  {% if tutor_page.has_next %}
+  <a href="?page={{tutee_page.next_page_number}}" class="btn btn-secondary">Next</a>
+  <a href="?page={{tutee_page.paginator.num_pages}}" class="btn btn-secondary">Last</a>
+  {% endif %}
+  <br>
+  <center>
+    <span>{{tutor_page.number}}</span>
+    <span>of</span>
+    <span>{{tutor_page.paginator.num_pages}}</span>
+  </center>
+</div>
 {% endblock %}
