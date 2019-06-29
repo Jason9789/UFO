@@ -1,33 +1,13 @@
-import os
+from django.contrib import admin
+from django.urls import path, include
+import page.views
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ')5_b$@)(s2d@m*l5-19#v%*2-#ebneu7uzt)+c%je)d%*_2$10'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = ['*']
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    # 'tutorboard',
-    'page.apps.PageConfig',
-    'accounts.apps.AccountsConfig',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', page.views.home, name='home'),
+    path('accounts/', include('accounts.urls')),
+    # path('signup/', page.views.signup, name='signup'),
+    # path('login/', page.views.login, name='login'),
 ]
 
 MIDDLEWARE = [
