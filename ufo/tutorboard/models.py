@@ -11,7 +11,7 @@ class TutorRequest(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def summary(self):
         return self.content[:100]
 
@@ -25,3 +25,15 @@ class TutorApply(models.Model):
 
     def __str__(self):
         return self.title
+
+class TutorComment(models.Model):
+    blog = models.ForeignKey('TutorRequest',on_delete=models.CASCADE, related_name='tutorComments')
+    comment_author = models.CharField(max_length = 10)
+    comment_contents = models.TextField(max_length=200)
+    created_date = models.DateTimeField(auto_now_add=True)
+
+class TuteeComment(models.Model):
+    blog = models.ForeignKey('TutorApply',on_delete=models.CASCADE, related_name='tuteeComments')
+    comment_author = models.CharField(max_length = 10)
+    comment_contents = models.TextField(max_length=200)
+    created_date = models.DateTimeField(auto_now_add=True)

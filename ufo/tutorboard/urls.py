@@ -4,8 +4,8 @@ import tutorboard.views
 urlpatterns = [
     path('tutees', tutorboard.views.tutees, name='tutees'),
     path('tutors', tutorboard.views.tutors, name='tutors'),
-    path('tutorapply/<int:tutorapply_id>', tutorboard.views.tutorapply, name='tutorapply'),
-    path('tutorrequest/<int:tutorrequest_id>', tutorboard.views.tutorrequest, name='tutorrequest'),
+    path('tutorapply/<int:tutorapply_id>', tutorboard.views.tuteeComment, name='tutorapply'),
+    path('tutorrequest/<int:tutorrequest_id>', tutorboard.views.tutorComment, name='tutorrequest'),
     path('tutorapply/<int:tutorapply_id>/edittutorapply', tutorboard.views.tutorapplyedit, name='tutorapplyedit'),
     path('tutorapply/<int:tutorapply_id>/tutorapplyremove', tutorboard.views.tutorapplyremove, name='tutorapplyremove'),
     path('tutorapply/newtutorapply', tutorboard.views.newtutorapply, name='newtutorapply'),

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
-from .models import TutorApply, TutorRequest
-from .forms import TutorApplyForm, TutorRequestForm
+from .models import TutorApply, TutorRequest, TutorComment, TuteeComment
+from .forms import TutorApplyForm, TutorRequestForm, CommentForm, CommentForm2
 
 # Create your views here.
 def tutors(request):
@@ -87,4 +87,30 @@ def tutorapplyremove(request, tutorapply_id):
     tutorapply.delete()
     # messages.success(request, 'Post Successfully removed')
     return redirect('tutors')
-    
+
+
+def tutorComment(request, tutorrequest_id):
+    post = get_object_or_404(TutorRequest, pk=tutorrequest_id)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = post
+            comment.save()
+            return redirect('tutorrequest', post.pk)
+    else:
+        form = CommentForm()
+        return render(request, 'tutorboard/tutorrequest.html', {'form': form, 'tutorRequest': post})
+
+def tuteeComment(request, tutorapply_id):
+    post = get_object_or_404(TutorApply, pk=tutorapply_id)
+    if request.method == 'POST':
+        form = CommentForm2(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.blog = post
+            comment.save()
+            return redirect('tutorapply', post.pk)
+    else:
+        form = CommentForm2()
+        return render(request, 'tutorboard/tutorapply.html', {'form': form, 'tutorApply': post})
