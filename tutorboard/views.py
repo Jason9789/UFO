@@ -30,17 +30,31 @@ def tutorrequest(request, tutorrequest_id):
     tutorRequest = get_object_or_404(TutorRequest, pk=tutorrequest_id)
     return render(request, 'tutorboard/tutorrequest.html', {'tutorRequest': tutorRequest})
 
+# def newtutorapply(request):
+#     if request.method == "POST":
+#         form = TutorApplyForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             tutorapply = form.save(commit = False) # commit은 데이터베이스의 모든 작업이 저장되었을 때 True가 되는데, 그러면 comment를 더이상 수정하지 못 하게 됨, 우선 commit = False를 해서 뒤에 작업들을 할 수 있게 해줌
+#             tutorapply.author = request.user
+#             tutorapply.save()  # 여기는 default가 commit = True라서 따로 설정 안 해줌
+#             return redirect('tutorapply', tutorapply.pk)
+#     else:
+#         form = TutorApplyForm()
+#     return render(request, 'tutorboard/newtutorapply.html', {'form':form})
+
 def newtutorapply(request):
-    if request.method == "POST":
-        form = TutorApplyForm(request.POST, request.FILES)
-        if form.is_valid():
-            tutorapply = form.save(commit = False) # commit은 데이터베이스의 모든 작업이 저장되었을 때 True가 되는데, 그러면 comment를 더이상 수정하지 못 하게 됨, 우선 commit = False를 해서 뒤에 작업들을 할 수 있게 해줌
-            tutorapply.author = request.user
-            tutorapply.save()  # 여기는 default가 commit = True라서 따로 설정 안 해줌
-            return redirect('tutorapply', tutorapply.pk)
+    if request.method == 'POST':
+        tutorapply = TutorApply()
+        tutorapply.title = request.POST.get('title')
+        tutorapply.content = request.POST.get('content')
+        tutorapply.tutor_category = request.POST.get('tutor_category')
+        tutorapply.tutor_subcategory = request.POST.get('tutor_subcategory')
+        tutorapply.image = request.FILES.get('image')
+        tutorapply.author = request.user
+        tutorapply.save()
+        return redirect('tutorapply', tutorapply.pk)
     else:
-        form = TutorApplyForm()
-    return render(request, 'tutorboard/newtutorapply.html', {'form':form})
+        return render(request, 'tutorboard/newtutorapply.html')
 
 def tutorapplyedit(request, tutorapply_id):
     if request.method == "POST":
@@ -55,17 +69,31 @@ def tutorapplyedit(request, tutorapply_id):
         form = TutorApplyForm(instance=tutorApply)
     return render(request, 'tutorboard/tutorapplyedit.html', {'tutorApply': tutorApply, 'form': form})
 
+# def newtutorrequest(request):
+#     if request.method == "POST":
+#         form = TutorRequestForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             tutorrequest = form.save(commit = False) # commit은 데이터베이스의 모든 작업이 저장되었을 때 True가 되는데, 그러면 comment를 더이상 수정하지 못 하게 됨, 우선 commit = False를 해서 뒤에 작업들을 할 수 있게 해줌
+#             tutorrequest.author = request.user
+#             tutorrequest.save()  # 여기는 default가 commit = True라서 따로 설정 안 해줌
+#             return redirect('tutorrequest', tutorrequest.pk)
+#     else:
+#         form = TutorRequestForm()
+#     return render(request, 'tutorboard/newtutorrequest.html', {'form': form})
+
 def newtutorrequest(request):
-    if request.method == "POST":
-        form = TutorRequestForm(request.POST, request.FILES)
-        if form.is_valid():
-            tutorrequest = form.save(commit = False) # commit은 데이터베이스의 모든 작업이 저장되었을 때 True가 되는데, 그러면 comment를 더이상 수정하지 못 하게 됨, 우선 commit = False를 해서 뒤에 작업들을 할 수 있게 해줌
-            tutorrequest.author = request.user
-            tutorrequest.save()  # 여기는 default가 commit = True라서 따로 설정 안 해줌
-            return redirect('tutorrequest', tutorrequest.pk)
+    if request.method == 'POST':
+        tutorrequest = TutorRequest()
+        tutorrequest.title = request.POST.get('title')
+        tutorrequest.content = request.POST.get('content')
+        tutorrequest.tutor_category = request.POST.get('tutor_category')
+        tutorrequest.tutor_subcategory = request.POST.get('tutor_subcategory')
+        tutorrequest.image = request.FILES.get('image')
+        tutorrequest.author = request.user
+        tutorrequest.save()
+        return redirect('tutorrequest', tutorrequest.pk)
     else:
-        form = TutorRequestForm()
-    return render(request, 'tutorboard/newtutorrequest.html', {'form': form})
+        return render(request, 'tutorboard/newtutorrequest.html')
 
 def tutorrequestedit(request, tutorrequest_id):
     if request.method == "POST":
