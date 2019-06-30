@@ -5,8 +5,61 @@
 <div class="container mt-5">
     <h1>튜터 신청하기</h1>
     <br>
-    <form method="POST" enctype='multipart/form-data'>{% csrf_token %}
-        {{form.as_p}}<!-- form을 문단형식으로 출력 -->
+    <form method="POST" action="{% url 'newtutorapply' %}" enctype='multipart/form-data'>{% csrf_token %}
+        
+        <div class="wrap-input100 validate-input" data-validate="제목을 작성해주세요">
+                <span class="label-input100">글 제목:</span>
+                <input class="input100" type="text" name="title">
+                <span class="focus-input100"></span>
+        </div>
+        <div class="wrap-input100 validate-input" data-validate="내용을 입력해주세요!">
+                <span class="label-input100">글 내용:</span>
+                <textarea class="input100" name="content"></textarea>
+                <span class="focus-input100"></span>
+        </div>
+        
+        <div class="wrap-input100 validate-input">
+                <span class="label-input100">사진:</span>
+          <input type="file" name="image" accept="image/*">
+        </div><!-- form을 문단형식으로 출력 -->
+        <select id = "tutor_category" name="tutor_category">
+                        <script>
+                            var c = [('디자인', '디자인'), ('뷰티', '뷰티'), ('영상', '영상'), ('외국어', '외국어'), ('음악', '음악'),('스포츠', '스포츠')]
+                            for(i=0; i<6; i++) {
+                                document.write("<option ="+c[i]+">"+c[i]+"</option>")
+                            }
+                        </script>
+                    </select>
+                <!-- <option value="디자인">디자인</option>
+                <option value="뷰티">뷰티</option>
+                <option value="영상">영상</option>
+                <option value="외국어">외국어</option>
+                <option value="음악">음악</option>
+                <option value="스포츠">스포츠</option>
+                </select> -->
+                
+                <select id="tutor_subcategory" name="tutor_subcategory">
+                
+                <script>
+                var options = {
+                디자인: ['포토샵','일러스트레이터'],
+                뷰티: [('메이크업', '메이크업'), ('헤어', '헤어'), ('패션', '패션')],
+                영상: [('프리미어', '프리미어'), ('에프터이펙트', '에프터이펙트')],
+                외국어: [('영어', '영어'), ('중국어', '중국어'), ('일본어', '일본어'), ('불어', '불어'), ('독일어', '독일어')],
+                음악: [('피아노', '피아노'), ('성악', '성악'), ('바이올린', '바이올린'), ('플룻', '플룻'), ('빙구', '빙구')],
+                스포츠: [('빙구', '빙구'), ('족구', '족구'), ('축구', '축구'), ('테니스', '테니스'), ('스키', '스키')]
+                };
+                $(function(){
+  $('#tutor_category').change(function() {
+    var x= $('#tutor_category').val();
+    $('#tutor_subcategory').html("");
+    for(index in options[x]) {
+        $('#tutor_subcategory').append('<option value="' + options[x][index] + '">' + options[x][index] + '</option>')
+    };
+  }).change();   // <---- ADD THIS
+;})
+                </script>
+                </select>
         <input type="submit" value="Submit">
         </form>
     <a href="{% url 'home' %}">홈으로 돌아가기</a>
