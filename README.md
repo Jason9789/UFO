@@ -1,7 +1,7 @@
 우주선(우리 주변의 선택)
 ------------------------
 
-![Version](https://img.shields.io/badge/Version-1.0.0-green.svg) ![Django](https://img.shields.io/badge/Python-Django-darkgreen.svg) ![Likelion](https://img.shields.io/badge/Likelion-LikeOwl-9cf.svg) ![License](https://img.shields.io/badge/License-MIT-informational.svg)
+![Version](https://img.shields.io/badge/Version-1.0.0-green.svg) ![Build](https://img.shields.io/badge/Build-Passing-success.svg) ![Django](https://img.shields.io/badge/Python-Django-darkgreen.svg) ![Likelion](https://img.shields.io/badge/Likelion-LikeOwl-9cf.svg) ![License](https://img.shields.io/badge/License-MIT-informational.svg)
 
 ### 팀원
 
